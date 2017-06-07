@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bubble.entity.InventoryEntity" table="inventory" schema="Ecommerce">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="user">
+            <column name="user" sql-type="varchar(225)" length="225" not-null="true"/>
+        </property>
+        <property name="sum">
+            <column name="sum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <many-to-one name="productByProductId" class="com.bubble.entity.ProductEntity">
+            <column name="productId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

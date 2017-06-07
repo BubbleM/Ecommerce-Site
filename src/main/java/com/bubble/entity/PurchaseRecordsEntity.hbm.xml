@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bubble.entity.PurchaseRecordsEntity" table="purchase_records" schema="Ecommerce">
+        <id name="id">
+            <column name="id" sql-type="bigint(20)"/>
+        </id>
+        <property name="time">
+            <column name="time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="info">
+            <column name="info" sql-type="varchar(225)" length="225" not-null="true"/>
+        </property>
+        <many-to-one name="usersByUserId" class="com.bubble.entity.UsersEntity">
+            <column name="userId" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
