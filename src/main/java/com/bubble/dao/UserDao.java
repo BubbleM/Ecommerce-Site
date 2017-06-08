@@ -2,6 +2,7 @@ package com.bubble.dao;
 
 import com.bubble.entity.UsersEntity;
 import com.bubble.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.Iterator;
@@ -33,12 +34,45 @@ public class UserDao {
     */
     public void deleteUser(Integer id){
         Session session = null;
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            UsersEntity user = session.load(UsersEntity.class,new Integer(id));
+            session.delete(user);
+            session.getTransaction().commit();
+            System.out.println("删除成功"+id);
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    /*
+    * 修改用户密码
+    */
+    public void updatePwdByName(String name,String password){
+        Session session = null;
+        String pwd = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            String hql = "update UsersEntity set password='"+password+"' where name='"+name+"' ";
+            int result = session.createQuery(hql).executeUpdate();
+            if(result == 1){
+                System.out.println("update success");
+            }else {
+                System.out.println("sorry please try agagin");
+            }
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction();
+        }
     }
 
     /*
     * 根据用户输入的用户名查找密码
     */
-
     public String findPwdByName(String name){
         Session session = null;
         String pwd = null;
@@ -59,10 +93,39 @@ public class UserDao {
         return pwd;
     }
 
+    /*
+    * 根据输入的用户名查询是否已经存在
+    */
+    public boolean findUserByName(String name){
+        Session session = null;
+        String pwd = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            String hql = "from UsersEntity user where user.name='"+name+"'";
+            Query query = session.createQuery(hql);
+            List<UsersEntity> list = query.list();
+            for(UsersEntity user:list){
+                if(list != null){
+                    System.out.println("该用户已经存在");
+                    return true;
+                }
+            }
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction();
+        }
+        return false;
+    }
+
     public static void main(String[] args){
         UserDao dao = new UserDao();
-        UsersEntity user = null;
+//        UsersEntity user = null;
+//        dao.deleteUser(42);
+//        dao.updatePwdByName("ddds","099");
 //      String password =  dao.findPwdByName("BubbleM");
+//        System.out.println(dao.findUserByName("jj"));
 //        String password = user.getPassword();
 //        System.out.print(password);
 //        System.out.println(user.getName());
