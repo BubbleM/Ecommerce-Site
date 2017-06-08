@@ -8,7 +8,7 @@
     <title>登陆</title>
 </head>
 <body>
-<form action="" method="post">
+<form action="login.do" method="post">
     Username:<input type="text"　name="name"/></br>
     Password:<input type="password" name="password"/></br>
     <input type="submit"/>

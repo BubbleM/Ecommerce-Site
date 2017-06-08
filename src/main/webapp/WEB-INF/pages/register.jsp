@@ -8,11 +8,10 @@
     <title>注册</title>
 </head>
 <body>
-<form action="UserServlet" method="post">
-    Username:<input type="text"　name="username"/></br>
+<form action="user/register.do" method="post">
+    UserName:<input type="text" name="name"/></br>
     Password:<input type="password" name="password"/></br>
     <input type="submit"/>
 </form>
-
 </body>
 </html>
