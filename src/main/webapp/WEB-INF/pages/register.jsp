@@ -8,8 +8,9 @@
     <title>注册</title>
 </head>
 <body>
+<h1>注册页面</h1>
 <form action="user/register.do" method="post">
-    UserName:<input type="text" name="name"/></br>
+    UserName:<input type="text" name="username"/></br>
     Password:<input type="password" name="password"/></br>
     <input type="submit"/>
 </form>

@@ -20,8 +20,8 @@
 </head>
 <body>
 <h1>这里是SpringMVC Demo首页</h1>
-<h2>姓名:${param.username}</h2>
-<h2>密码:${param.password}</h2>
+<%--<h2>姓名:${param.username}</h2>--%>
+<%--<h2>密码:${param.password}</h2>--%>
 <a href="register.jsp">进入</a>
 
 <h3>出现此页面，说明配置成功。</h3>

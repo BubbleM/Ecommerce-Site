@@ -23,21 +23,32 @@ public class UserController {
 //    @RequestMapping(value = "/",method = RequestMethod.GET)
     @RequestMapping("/register.do")
     // xxx/user/register.do
-    public String register(HttpServletRequest request, HttpServletResponse response, String name, String password) throws IOException {
+    public String register(HttpServletRequest request, HttpServletResponse response, String username, String password) throws IOException {
 //        String username = request.getParameter("name");
 //        String password = request.getParameter("password");
         UsersEntity user = new UsersEntity();
-        user.setName(name);
-        user.setPassword(password);
-        dao.insertUser(user);
-        System.out.println(name);
-        System.out.println(password);
-        System.out.println("注册成功");
-        return "index";
+        if(!dao.findUserByName(username)){
+            user.setName(username);
+            user.setPassword(password);
+            dao.insertUser(user);
+            System.out.println(username);
+            System.out.println(password);
+            System.out.println("注册成功");
+            return "login";
+        }else{
+            return "error";
+        }
     }
     @RequestMapping("/login.do")
-    public String login(){
-        return "redirect:login";
+    public String login(String username,String password){
+        System.out.println(username);
+        System.out.println(password);
+        String pwd = dao.findPwdByName(username);
+        if(pwd.equals(password)){
+            return "index";
+        }else {
+            return "error";
+        }
     }
 }
 
