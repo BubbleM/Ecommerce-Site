@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nested Panel - jQuery EasyUI Demo</title>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/themes/icon.css">
+</head>
+<body>
+<div id="box" class="easyui-layout" style="width: 600px;height: 600px;">
+    <div data-options="
+        region:'north',
+        title:'管理系统后台',
+        border:true,
+        split:true,
+        iconCls:'icon-save',
+        href:'context.html',
+        collapsible:false
+    "style="height: 80px;"></div>
+    <div data-options="region:'west',title:'左西',border:true,split:true" style="width: 100px;"></div>
+    <div data-options="region:'center',title:'中间',border:true,split:true"></div>
+    <!--<div data-options="region:'east',title:'右东',border:true,split:true" style="width: 100px;"></div>-->
+    <div data-options="region:'south',title:'版权信息',border:true,split:true,collapsible:false" style="height: 60px;"></div>
+</div>
+</body>
+
+</html>

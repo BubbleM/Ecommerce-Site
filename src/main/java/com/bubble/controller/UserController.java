@@ -4,6 +4,7 @@ import com.bubble.dao.UserDao;
 import com.bubble.entity.UsersEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class UserController {
 //    @RequestMapping(value = "/",method = RequestMethod.GET)
     @RequestMapping("/register.do")
     // xxx/user/register.do
+    @ResponseBody
     public String register(HttpServletRequest request, HttpServletResponse response, String username, String password) throws IOException {
 //        String username = request.getParameter("name");
 //        String password = request.getParameter("password");
@@ -40,14 +42,15 @@ public class UserController {
         }
     }
     @RequestMapping("/login.do")
-    public String login(String username,String password){
+    @ResponseBody
+    public String login(String username, String password){
         System.out.println(username);
         System.out.println(password);
         String pwd = dao.findPwdByName(username);
         if(pwd.equals(password)){
-            return "index";
+            return "true";
         }else {
-            return "error";
+            return "false";
         }
     }
 }
