@@ -14,6 +14,26 @@
                 fit:true,
                 border:false,
             });
+            $("#divtree").tree({
+                onClick:function(node){
+                    if(node.url){
+                        $('#tabs').tabs('add',{
+                            title:node.text,
+                            closable:true,
+                            iconCls:node.iconCls,
+                            href:node.url,
+                        });
+                    }
+                }
+            });
+//            $('#userManager').onclick = function () {
+//                alert("hah");
+//                $('#tabs').tabs('add',{
+//                    title:this.title,
+//                    closable:true,
+//
+//                })
+//            }
         });
     </script>
     <style type="text/css">
@@ -49,8 +69,23 @@
             您好,{} | <a href="">退出</a>
         </div>
     </div>
-    <div data-options="region:'west',title:'导航',iconCls:'icon-world',split:true" style="width: 180px;padding: 10px;">
-        <ul id="nav"></ul>
+    <div data-options="region:'west',title:'导航',iconCls:'icon-nav',split:true" style="width: 180px;padding: 10px;">
+        <ul class="easyui-tree" id="divtree">
+            <li>
+                <span>系统管理</span>
+                <ul>
+                    <li data-options="iconCls:'icon-user',url:''">用户管理</li>
+                    <li data-options="iconCls:'icon-product',url:''">商品管理</li>
+                    <li data-options="iconCls:'icon-purchase',url:''">订单管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>库存管理</span>
+                <ul>
+                    <li data-options="iconCls:'icon-inventory',url:''">库存管理</li>
+                </ul>
+            </li>
+        </ul>
     </div>
     <div data-options="region:'center'" style="overflow: hidden;">
         <div id="tabs">

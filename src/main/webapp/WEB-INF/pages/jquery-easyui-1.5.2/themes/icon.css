@@ -70,6 +70,28 @@
 .icon-login{
 	background:url('icons/login.png') no-repeat center center;
 }
+.icon-nav{
+	background:url('icons/nav.png') no-repeat center center;
+}
+.icon-house{
+	background:url('icons/house.png') no-repeat center center;
+}
+.icon-product{
+	background:url('icons/product.png') no-repeat center center;
+}
+.icon-user{
+	background:url('icons/user.png') no-repeat center center;
+}
+.icon-manger{
+	background:url('icons/manger.png') no-repeat center center;
+}
+.icon-inventory{
+	background:url('icons/inventory.png') no-repeat center center;
+}
+.icon-purchase{
+	background:url('icons/purchase.png') no-repeat center center;
+}
+
 
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat center center;
