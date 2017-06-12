@@ -1,0 +1,146 @@
+/* CSS Document */
+
+* 
+{
+	padding: 0;
+	margin: 0;
+}
+img {
+	border: 0;
+}
+.divcenter {
+	width: 980px;
+	height: 630px;
+	margin: 0 auto;
+	/*	background:;
+*/	border-width: 0px;
+}
+.divcenter .divcentertop {
+	background-image: url(../images/login_03.png);
+	background-repeat: no-repeat;
+	height: 271px;
+	border-width: 0px;
+	width: 980px;
+}
+.divcenter .divcenterc {
+	height: 100px;
+	/*	overflow: hidden;
+*/	border-width: 0px;
+	width: 980px;
+}
+.divcenter .divcenterc .divcentercleft {
+	background-image: url(../images/login_05.png);
+	background-repeat: no-repeat;
+	height: 100px;
+	width: 353px;
+	border: none;
+	float: left;
+}
+/*登陆框样式*/	
+.divcenter .divcenterc .divcentercright {
+	/*	background-image: url(images/dlk.gif);
+	background-repeat: no-repeat;
+*/	
+	height: 120px;
+	width: 311px;
+	border-width: 0px;
+	float: left;
+	overflow: hidden;/*	或者line-height  或者font-size:0;这样这个div就不会过于设定值高以便兼容ie6浏览器
+*/
+	background-color: #FFF;
+}
+.divcenter .divcenterc .divcentercright .loginform {
+	height: 110px;
+	width: 304px;
+	border: #d4d5d5 4px double;/*	background-color: #FFF;
+*/}
+/*登陆框内部用户框css样式*/
+.divcenter .divcenterc .divcentercright .loginform .pass-username {
+	margin-left: 26px;
+}
+.divcenter .divcenterc .divcentercright .loginform .pass-username .pass_input_username {
+	background: url(../images/user_login_name.gif) no-repeat scroll 0% 0% transparent;
+	border-width: 0px;
+	padding-left: 25px;
+	/*	padding-right: 10px;
+*/	margin-left: 22px;
+	margin-top: 16px;
+	color: #000;
+	height: 21px;
+	line-height: 20px;
+	width: 140px;
+}
+/*登陆框内部密码框css样式*/
+.divcenter .divcenterc .divcentercright .loginform .pass-password {
+	margin-left: 26px;
+}
+.divcenter .divcenterc .divcentercright .loginform .pass-password .pass_input_password {
+	background: url(../images/user_login_password.gif) no-repeat scroll 0% 0% transparent;
+	border-width: 0px;
+	padding-left: 25px;
+	margin-left: 22px;
+	margin-top: 8px;
+	color: #000;
+	height: 21px;
+	line-height: 20px;
+	width: 140px;
+}
+/*登陆框内部部门\岗位框css样式*/
+.divcenter .divcenterc .divcentercright .loginform .pass-bumen {
+	margin-left: 26px;
+}
+.divcenter .divcenterc .divcentercright .loginform .pass-bumen .pass_select_bumen {
+	margin-left: 22px;
+	margin-top: 6px;
+	width: 100px;
+	height: 21px;
+	font: 12px/150% Arial, Helvetica, sans-serif;
+}
+.divcenter .divcenterbottom {
+	/*	background-image: url(images/login.gif);
+	background-repeat: no-repeat;
+*/	height: 40px;
+	border-width: 0px;
+	width: 980px;
+	margin-top: 20px;/*	background-color:#0F0;
+*/
+}
+/*登陆css样式*/
+.divcenter .divcenterbottom .pass_load_upout {
+	float: left;
+	margin-left: 383px;
+	margin-top: 2px;
+	border-width: 0px;
+	background: url(../images/dl01.gif) no-repeat scroll 0% 0% transparent;
+	width: 112px;
+	height: 38px;/*	background-color:#CF6;
+*/
+}
+.divcenter .divcenterbottom .pass_load_upover {
+	float: left;
+	margin-left: 383px;
+	margin-top: 2px;
+	border-width: 0px;
+	background: url(../images/dl02.gif) no-repeat scroll 0% 0% transparent;
+	width: 112px;
+	height: 38px;
+}
+/*退出css样式*/
+.divcenter .divcenterbottom .pass_load_downout {
+	background: url(../images/dtc01.gif) no-repeat scroll 0% 0% transparent;
+	float: left;
+	margin-left: 26px;
+	margin-top: 2px;
+	border-width: 0px;
+	width: 112px;
+	height: 38px;
+}
+.divcenter .divcenterbottom .pass_load_downover {
+	background: url(../images/dtc02.gif) no-repeat scroll 0% 0% transparent;
+	float: left;
+	margin-left: 26px;
+	margin-top: 2px;
+	border-width: 0px;
+	width: 112px;
+	height: 38px;
+}

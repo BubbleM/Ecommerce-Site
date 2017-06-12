@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Nested Panel - jQuery EasyUI Demo</title>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/themes/icon.css">
+    <script type="text/javascript">
+        $(function () {
+            $('#tabs').tabs({
+                fit:true,
+                border:false,
+            });
+            $("#divtree").tree({
+                onClick:function(node){
+                    if(node.url){
+                        $('#tabs').tabs('add',{
+                            title:node.text,
+                            closable:true,
+                            iconCls:node.iconCls,
+                            href:node.url,
+                        });
+                    }
+                }
+            });
+//            $('#userManager').onclick = function () {
+//                alert("hah");
+//                $('#tabs').tabs('add',{
+//                    title:this.title,
+//                    closable:true,
+//
+//                })
+//            }
+        });
+    </script>
+    <style type="text/css">
+        .logo{
+            width: 180px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            float:left;
+            color: #fff;
+        }
+        .logout{
+            float: right;
+            padding: 30px 15px 0 0;
+            color: #fff;
+        }
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body>
-$END$
+<body id="box" class="easyui-layout">
+<!--<div id="box" class="easyui-layout" style="width: 600px;height: 600px;">-->
+<div data-options="region:'north',title:'管理系统后台',split:true,noheader:true,"style="height: 60px;background: #666;">
+    <div class="logo">后台管理</div>
+    <div class="logout">
+        您好,{} | <a href="">退出</a>
+    </div>
+</div>
+<div data-options="region:'west',title:'导航',iconCls:'icon-nav',split:true" style="width: 180px;padding: 10px;">
+    <ul class="easyui-tree" id="divtree">
+        <li>
+            <span>系统管理</span>
+            <ul>
+                <li data-options="iconCls:'icon-user',url:'user.html'">用户管理</li>
+                <li data-options="iconCls:'icon-product',url:''">商品管理</li>
+                <li data-options="iconCls:'icon-purchase',url:''">订单管理</li>
+            </ul>
+        </li>
+        <li>
+            <span>库存管理</span>
+            <ul>
+                <li data-options="iconCls:'icon-inventory',url:''">库存管理</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div data-options="region:'center'" style="overflow: hidden;">
+    <div id="tabs">
+        <div title="起始页" iconCls="icon-house" style="padding: 0 10px;display: block;">
+            <p>欢迎来到后台管理系统!</p>
+        </div>
+    </div>
+</div>
+<!--<div data-options="region:'east',title:'右东',border:true,split:true" style="width: 100px;"></div>-->
+<div data-options="region:'south',title:'版权信息',noheader:true,split:true" style="height: 35px;line-height: 30px;text-align: center
+;">@2017-2019  BubbleM电子商务网站,　Powered by JavaEE and EasyUI</div>
+<!--</div>-->
 </body>
+
 </html>

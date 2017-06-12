@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" xmlns="">
+	<http auto-config='true'>
+	  
+         <!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->  
+        <intercept-url pattern="/**/*.jpg" access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+        <intercept-url pattern="/**/*.png" access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+        <intercept-url pattern="/**/*.gif" access="IS_AUTHENTICATED_ANONYMOUSLY"  />  
+        <intercept-url pattern="/**/*.css" access="IS_AUTHENTICATED_ANONYMOUSLY"  />  
+        <intercept-url pattern="/**/*.js" access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+        <intercept-url pattern="**.jpg" access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+        <intercept-url pattern="**.do" access="ROLE_ADMIN,ROLE_USER" />
+        
+        <intercept-url pattern="/adduser.do" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <intercept-url pattern="/signup.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	     <intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    
+		<intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
+		
+		<intercept-url pattern="/**" access="ROLE_USER" />
+		<form-login login-page="/login.jsp"
+                    authentication-failure-url="/login.jsp?error=true"
+                          default-target-url="/mark.jsp" />
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="select username,password,status as enabled
+                                        from user
+                                           where username=?"
+            authorities-by-username-query="select u.username,r.name as authority
+                                             from user u
+                                             join user_role ur
+                                             on u.id=ur.user_id
+                                             join role r
+                                             on r.id=ur.role_id
+                                             where u.username=?"/>
+		<!--
+			<user-service> <user name="admin" password="admin" authorities="ROLE_USER,
+				ROLE_ADMIN" /> <user name="user" password="user" authorities="ROLE_USER"
+				/> </user-service>
+				-->
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- 配置dataSource -->
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/security" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="123456" />
+	</beans:bean>
+</beans>

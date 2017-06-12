@@ -1,5 +1,6 @@
 package com.bubble.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.bubble.dao.UserDao;
 import com.bubble.entity.UsersEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bubble on 17-6-7.
@@ -52,6 +56,44 @@ public class UserController {
         }else {
             return "false";
         }
+    }
+
+    @RequestMapping("/getUsers.do")
+    @ResponseBody
+    public void getUsers(HttpServletResponse response){
+        List<String> arr = new ArrayList<>();
+        List<UsersEntity> users = dao.getUsers();
+        System.out.println("get user info!");
+        response.setCharacterEncoding("utf-8");
+        Writer writer;
+        try {
+            writer = response.getWriter();
+            String jsonString = JSON.toJSONString(users);
+            System.out.println(jsonString);
+            writer.append(JSON.toJSONString(users));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+//            System.out.println(list);
+//        for(UsersEntity user:list){
+//            if(list != null){
+//                String json = JSON.toJSONString(user);
+//                arr.add(json);
+//            }
+//        }
+//        return arr;
+    }
+    @RequestMapping("/add.do")
+    public String userAdd(String username,String password){
+        UsersEntity user = new UsersEntity();
+        user.setName(username);
+        user.setPassword(password);
+        dao.insertUser(user);
+        System.out.println(username);
+        return "success";
     }
 }
 

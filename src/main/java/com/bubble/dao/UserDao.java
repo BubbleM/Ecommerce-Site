@@ -5,8 +5,11 @@ import com.bubble.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static org.hibernate.internal.util.SerializationHelper.serialize;
 
 /**
  * Created by bubble on 17-6-7.
@@ -71,6 +74,36 @@ public class UserDao {
     }
 
     /*
+    * 查找数据库中所有user信息
+    * */
+    public List<UsersEntity> getUsers(){
+        Session session = null;
+        List<UsersEntity> list = null;
+//        List<UsersEntity> users = new ArrayList<UsersEntity>();
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            String hql = "from UsersEntity u";
+            Query query = session.createQuery(hql);
+            list = query.list();
+//            for(UsersEntity user:list){
+//                if(list != null){
+////                    String json = JSON.toJSONString(user);
+//                    users.add(user);
+////                    System.out.println(json);
+//                }
+//            }
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction();
+        }
+//        System.out.println(arr);
+//        return arr;
+        return list;
+    }
+
+    /*
     * 根据用户输入的用户名查找密码
     */
     public String findPwdByName(String name){
@@ -121,6 +154,8 @@ public class UserDao {
 
     public static void main(String[] args){
         UserDao dao = new UserDao();
+        System.out.println(dao.getUsers());
+
 //        UsersEntity user = null;
 //        dao.deleteUser(42);
 //        dao.updatePwdByName("ddds","099");
