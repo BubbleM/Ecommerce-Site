@@ -5,7 +5,6 @@ import com.bubble.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,23 +18,29 @@ public class UserDao {
     /*
     *插入新用户
     */
-    public void insertUser(UsersEntity user){
+    public int insertUser(UsersEntity user){
         Session session = null; //声明Session对象
+        int result;
         try {
             session = HibernateUtil.getSession(); //获取Session
             session.beginTransaction();//开启事务
             session.save(user);  //保存用户信息
             session.getTransaction().commit(); //提交事务
+            result = 1;
         }catch (Exception e){
+            result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+        System.out.println("____________"+result);
+        return result;
     }
 
     /*
     * 管理员根据id删除相应用户
     */
-    public void deleteUser(Integer id){
+    public int deleteUser(Integer id){
+        int result;
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -44,10 +49,13 @@ public class UserDao {
             session.delete(user);
             session.getTransaction().commit();
             System.out.println("删除成功"+id);
+            result = 1;
         }catch (Exception e){
+            result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
         }
+        return result;
     }
 
     /*
@@ -152,10 +160,45 @@ public class UserDao {
         return false;
     }
 
+    /*
+    * 保存或更改用户对象
+    * */
+    public int saveOrUpdateUser(UsersEntity user){
+        Session session = null;
+        int result;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            session.saveOrUpdate(user);
+            session.getTransaction().commit();
+            result = 1;
+        }catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return result;
+    }
+    public UsersEntity findUserById(Integer id){
+        Session session = null;
+        UsersEntity user = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+            user = (UsersEntity)session.get(UsersEntity.class,id);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return user;
+    }
+
+
     public static void main(String[] args){
         UserDao dao = new UserDao();
-        System.out.println(dao.getUsers());
-
+//        System.out.println(dao.getUsers());
+//        System.out.println(dao.findUserById(69).getName());
 //        UsersEntity user = null;
 //        dao.deleteUser(42);
 //        dao.updatePwdByName("ddds","099");

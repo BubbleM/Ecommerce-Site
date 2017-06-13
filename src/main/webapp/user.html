@@ -35,10 +35,10 @@
                 <th field="id" width="50">ID</th>
                 <th field="name" width="50">Name</th>
                 <th field="password" width="50">Password</th>
-                <th field="firstname" width="50">First Name</th>
-                <th field="lastname" width="50">Last Name</th>
+                <th field="firstName" width="50">First Name</th>
+                <th field="lastName" width="50">Last Name</th>
                 <th field="phone" width="50">Phone</th>
-                <th field="email" width="50">Email</th>
+                <th field="type" width="50">Type</th>
             </tr>
         </thead>
     </table>
@@ -71,9 +71,13 @@
                 <input name="phone">
             </div>
             <div class="fitem">
-                <label>Email:</label>
-                <input name="email" class="easyui-validatebox" validType="email">
+                <label>Type:</label>
+                <input name="type" class="easyui-validatebox" required="true">
             </div>
+            <!--<div class="fitem">-->
+                <!--<label>Email:</label>-->
+                <!--<input name="email" class="easyui-validatebox" validType="email">-->
+            <!--</div>-->
         </form>
     </div>
     <div id="dlg-buttons">
@@ -103,9 +107,13 @@
                 <input name="phone">
             </div>
             <div class="fitem">
-                <label>Email:</label>
-                <input name="email" class="easyui-validatebox" validType="email">
+                <label>Type:</label>
+                <input name="type" class="easyui-validatebox" required="true">
             </div>
+            <!--<div class="fitem">-->
+                <!--<label>Email:</label>-->
+                <!--<input name="email" class="easyui-validatebox" validType="email">-->
+            <!--</div>-->
         </form>
     </div>
     <div id="dlg-buttons-edit">
@@ -128,18 +136,18 @@
                 $("#id").text(id);
                 var name = row.name;
                 var password = row.password;
-                var firstname = row.firstname;
-                var lastname = row.lastname;
+                var firstname = row.firstName;
+                var lastname = row.lastName;
                 var phone = row.phone;
-                var email = row.email;
+                var type = row.type;
                 console.info("editUser--->id = " + id + ",name = " + name + ", firstname = " + firstname + ", lastname = " + lastname + 
-                	", password = " + password + ", phone = " + phone + ", email = " +email);
+                	", password = " + password + ", phone = " + phone + ", type = " +type);
                 $("#fm_edit").form('load',{
                 	firstname:firstname,
                 	lastname:lastname,
                 	password:password,
                 	phone:phone,
-                	email:email,
+                	type:type,
                 	id:id,
                 	name:name
                 });
@@ -150,7 +158,8 @@
         	var id = $("#id").text();
         	//$.messager.progress();
         	$("#fm_edit").form('submit',{
-        		url:"http://localhost:8080/ec_test/user/updateUser.do?id=" + id,
+//        	    url:'user/updateUser.do',
+        		url:"http://localhost:8080/EcommerceSiteLM/user/updateUser.do?id=" + id,
         		onSubmit:function(){
         			var isValid = $("this").form('validate');
         			/* if(!isValid){
@@ -182,7 +191,7 @@
         
         function saveUser(){
             $('#fm').form('submit',{
-                url: "http://localhost:8080/ec_test/user/add2.do",
+                url: "http://localhost:8080/EcommerceSiteLM/user/add.do",
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
@@ -209,7 +218,7 @@
             	console.log("rowIndex: " + index);
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('user/delete2.do',{id:row.id},function(result){
+                        $.post('user/delete.do',{id:row.id},function(result){
                         	console.log("result: " + result);
                         	if (result.success == true){
                         		console.log("rowIndex: " + index);

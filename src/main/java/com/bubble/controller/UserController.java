@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bubble on 17-6-7.
@@ -86,14 +88,113 @@ public class UserController {
 //        }
 //        return arr;
     }
+
     @RequestMapping("/add.do")
-    public String userAdd(String username,String password){
+    public void userAdd(String firstname,String lastname,String password,String phone,String type,HttpServletResponse response){
         UsersEntity user = new UsersEntity();
-        user.setName(username);
+        user.setName(firstname+lastname);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
         user.setPassword(password);
-        dao.insertUser(user);
-        System.out.println(username);
-        return "success";
+        user.setPhone(phone);
+        user.setType(type);
+        int r = dao.insertUser(user);
+        response.setCharacterEncoding("utf-8");
+        Writer writer = null;
+        try {
+            writer = response.getWriter();
+            if(r>0){
+                writer.append("OK");
+            }else{
+                writer.append("NO");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally{
+            if(writer != null){
+                try {
+                    writer.close();
+                    writer = null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
+
+    @RequestMapping("/updateUser.do")
+    public void updateUser(Integer id,String firstname,String lastname,String password,String phone,String type,HttpServletResponse response){
+        System.out.println("*****************update user!************");
+        String name = firstname+lastname;
+        System.out.println("id="+id+" name="+name+" password="+password+" phone"+phone+" type="+type);
+        UsersEntity user = dao.findUserById(id);
+//        System.out.println(user.getName());
+        user.setName(name);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setPhone(phone);
+        user.setType(type);
+        int r =  dao.saveOrUpdateUser(user);
+        response.setCharacterEncoding("utf-8");
+        Writer writer = null;
+        try {
+            writer = response.getWriter();
+            if(r>0){
+                writer.append("OK");
+            }else{
+                writer.append("NO");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally{
+            if(writer != null){
+                try {
+                    writer.close();
+                    writer = null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @RequestMapping("/delete.do")
+    public void userDelete(Integer id,HttpServletResponse response){
+        int r = dao.deleteUser(id);
+        response.setCharacterEncoding("utf-8");
+        Writer writer = null;
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            writer = response.getWriter();
+            if(r>0){
+                System.out.println("delete success!");
+                map.put("success", true);
+            }else{
+                map.put("success", false);
+                System.out.println("delete fail!");
+            }
+            writer.append(JSON.toJSONString(map));
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally{
+            if(writer != null){
+                try {
+                    writer.close();
+                    writer = null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+//    public static void main(String[] args){
+//        UserController u = new UserController();
+//        u.updateUser(66,"Nicho","wei","12345432","18229060856","admin");
+//    }
 }
 
