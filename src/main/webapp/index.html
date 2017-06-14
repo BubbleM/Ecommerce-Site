@@ -66,7 +66,18 @@
 <div data-options="region:'north',title:'管理系统后台',split:true,noheader:true,"style="height: 60px;background: #666;">
     <div class="logo">后台管理</div>
     <div class="logout">
-        您好,{} | <a href="">退出</a>
+        <script type="text/javascript">
+            window.onload = function () {
+//                var thisURL = document.URL;
+//                var getval = thisURL.split('?')[1];
+//                var showval = getval.split('=')[1];
+//                console.log(showval);
+//                document.getElementById("username").innerText = showval;
+                var username = window.localStorage.getItem("username");
+                document.getElementById("username").innerText = username;
+            }
+        </script>
+        您好,<span id="username"></span> | <a href="login.html">退出</a>
     </div>
 </div>
 <div data-options="region:'west',title:'导航',iconCls:'icon-nav',split:true" style="width: 180px;padding: 10px;">
@@ -76,7 +87,7 @@
             <ul>
                 <li data-options="iconCls:'icon-user',url:'user.html'">用户管理</li>
                 <li data-options="iconCls:'icon-product',url:'product.html'">商品管理</li>
-                <li data-options="iconCls:'icon-purchase',url:''">订单管理</li>
+                <li data-options="iconCls:'icon-purchase',url:'inventory.html'">订单管理</li>
             </ul>
         </li>
         <li>

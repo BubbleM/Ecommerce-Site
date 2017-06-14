@@ -192,9 +192,9 @@ public class UserController {
             }
         }
     }
-//    public static void main(String[] args){
-//        UserController u = new UserController();
+    public static void main(String[] args){
+        UserController u = new UserController();
 //        u.updateUser(66,"Nicho","wei","12345432","18229060856","admin");
-//    }
+    }
 }
 

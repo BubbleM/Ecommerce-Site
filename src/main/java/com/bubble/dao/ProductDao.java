@@ -142,6 +142,10 @@ public class ProductDao {
         }
         return result;
     }
+
+    /*
+    * 根据id查找对应的商品并返回对应实体对象
+    * */
     public ProductEntity findProductById(Integer id){
         Session session = null;
         ProductEntity product = null;
