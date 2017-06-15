@@ -14,8 +14,8 @@
         <property name="sum">
             <column name="sum" sql-type="int(11)" not-null="true"/>
         </property>
-        <many-to-one name="productByProductId" class="com.bubble.entity.ProductEntity">
-            <column name="productId"/>
-        </many-to-one>
+        <property name="idProduct">
+            <column name="id_product" sql-type="int(11)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

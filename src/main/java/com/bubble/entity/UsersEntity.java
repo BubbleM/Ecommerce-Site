@@ -3,7 +3,7 @@ package com.bubble.entity;
 import javax.persistence.*;
 
 /**
- * Created by bubble on 17-6-13.
+ * Created by bubble on 17-6-15.
  */
 @Entity
 @Table(name = "users", schema = "Ecommerce", catalog = "")

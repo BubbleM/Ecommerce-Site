@@ -3,7 +3,7 @@ package com.bubble.entity;
 import javax.persistence.*;
 
 /**
- * Created by bubble on 17-6-7.
+ * Created by bubble on 17-6-15.
  */
 @Entity
 @Table(name = "inventory", schema = "Ecommerce", catalog = "")
@@ -11,7 +11,7 @@ public class InventoryEntity {
     private int id;
     private String user;
     private Integer sum;
-    private ProductEntity productByProductId;
+    private Integer idProduct;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -43,6 +43,16 @@ public class InventoryEntity {
         this.sum = sum;
     }
 
+    @Basic
+    @Column(name = "id_product", nullable = true)
+    public Integer getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +63,7 @@ public class InventoryEntity {
         if (id != that.id) return false;
         if (user != null ? !user.equals(that.user) : that.user != null) return false;
         if (sum != null ? !sum.equals(that.sum) : that.sum != null) return false;
+        if (idProduct != null ? !idProduct.equals(that.idProduct) : that.idProduct != null) return false;
 
         return true;
     }
@@ -62,16 +73,7 @@ public class InventoryEntity {
         int result = id;
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (sum != null ? sum.hashCode() : 0);
+        result = 31 * result + (idProduct != null ? idProduct.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "productId", referencedColumnName = "id", nullable = false)
-    public ProductEntity getProductByProductId() {
-        return productByProductId;
-    }
-
-    public void setProductByProductId(ProductEntity productByProductId) {
-        this.productByProductId = productByProductId;
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by bubble on 17-6-7.
+ * Created by bubble on 17-6-15.
  */
 @Entity
 @Table(name = "purchase_records", schema = "Ecommerce", catalog = "")
@@ -12,7 +12,6 @@ public class PurchaseRecordsEntity {
     private long id;
     private Timestamp time;
     private String info;
-    private UsersEntity usersByUserId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -64,15 +63,5 @@ public class PurchaseRecordsEntity {
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (info != null ? info.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
-    public UsersEntity getUsersByUserId() {
-        return usersByUserId;
-    }
-
-    public void setUsersByUserId(UsersEntity usersByUserId) {
-        this.usersByUserId = usersByUserId;
     }
 }
