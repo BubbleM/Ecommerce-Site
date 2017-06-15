@@ -12,6 +12,7 @@ public class InventoryEntity {
     private String user;
     private Integer sum;
     private Integer idProduct;
+    private ProductEntity productByProductId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -76,4 +77,15 @@ public class InventoryEntity {
         result = 31 * result + (idProduct != null ? idProduct.hashCode() : 0);
         return result;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "productId",referencedColumnName = "id",nullable = false)
+    public ProductEntity getProductByProductId() {
+        return productByProductId;
+    }
+
+    public void setProductByProductId(ProductEntity productByProductId) {
+        this.productByProductId = productByProductId;
+    }
+
 }

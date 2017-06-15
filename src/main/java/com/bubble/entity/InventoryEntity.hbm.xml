@@ -17,5 +17,8 @@
         <property name="idProduct">
             <column name="id_product" sql-type="int(11)" not-null="true"/>
         </property>
+        <many-to-one name="productByProductId" class="com.bubble.entity.ProductEntity">
+            <column name="productId"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

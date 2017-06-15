@@ -139,15 +139,15 @@ public class InventoryDao {
 //        InventoryEntity invent = new InventoryEntity();
 //        ProductEntity product = new ProductEntity();
 //        product.setId(4);
-//        invent.setProductByProductId(product);
+////        invent.setProductByProductId(product);
 //        invent.setSum(12);
 //        invent.setUser("BubbleM");
         InventoryDao dao = new InventoryDao();
         List<InventoryEntity> list = dao.getInventory();
-//        System.out.println(dao.getInventory());
+        System.out.println(dao.getInventory());
         for(InventoryEntity inventory:list){
             if(list != null){
-                System.out.println("___________________"+inventory.getProductByProductId().getName());
+//                System.out.println("___________________"+inventory.getProductByProductId().getName());
                 String json = JSON.toJSONString(inventory);
                 System.out.println(json);
             }

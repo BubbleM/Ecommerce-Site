@@ -33,14 +33,13 @@
         <thead>
             <tr>
                 <th field="id" width="50">ID</th>
-                <th field="productId" width="50">ProductId(不可更改)</th>
+                <!--<th field="productByProductId" width="50">Id_product(不可更改)</th>-->
+                <th field="idProduct" width="50">Id_product(不可更改)</th>
                 <th field="user" width="50">User</th>
                 <th field="sum" width="50">Sum</th>
             </tr>
         </thead>
     </table>
-    
-    
     <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInventory()">New Inventory</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInventory()">Edit Inventory</a>
@@ -52,8 +51,8 @@
         <div class="ftitle">Inventory Information</div>
         <form id="fm" method="post" novalidate>
             <div class="fitem">
-                <label>ProductId:</label>
-                <input name="productId" class="easyui-validatebox" required="true">
+                <label>Id_product:</label>
+                <input name="id_product" class="easyui-validatebox" required="true">
             </div>
             <div class="fitem">
                 <label>User:</label>
@@ -76,8 +75,8 @@
         <form id="fm_edit" method="post" novalidate>
             <span id="id" style="display: none;"></span>
             <div class="fitem">
-                <label>ProductId:</label>
-                <input name="productId" class="easyui-validatebox" required="true">
+                <label>Id_product:</label>
+                <input name="id_product" class="easyui-validatebox" required="true">
             </div>
             <div class="fitem">
                 <label>User:</label>
@@ -107,13 +106,13 @@
                 $('#dlg_edit').dialog('open').dialog('setTitle','Edit Inventory');
                 var id = row.id;
                 $("#id").text(id);
-                var productId = row.productId;
+                var id_product = row.id_product;
                 var user = row.user;
                 var sum = row.sum;
-                console.info("editInventory--->id = " + id + ",productId = " + productId + ",user = " + user + ", sum = " +sum);
+                console.info("editInventory--->id = " + id + ",id_product = " + id_product + ",user = " + user + ", sum = " +sum);
                 $("#fm_edit").form('load',{
                 	id:id,
-                    productId:productId,
+                    id_product:id_product,
                     user:user,
                     sum:sum
                 });

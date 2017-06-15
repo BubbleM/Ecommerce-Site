@@ -34,8 +34,18 @@ public class InventoryController {
         Writer writer;
         try{
             writer = response.getWriter();
+//            System.out.println("________"+inventory);
+//            for(InventoryEntity inv:inventory){
+//                if(inventory!= null){
+//                    Integer id = inv.getProductByProductId().getId();
+//                    inv.setProductByProductId(id);
+//                    String json = JSON.toJSONString(inv.getProductByProductId().getId());
+//                    users.add(user);
+//                    System.out.println("------"+json);
+//                }
+//            }
             String jsonString = JSON.toJSONString(inventory);
-//           System.out.println(jsonString);
+            System.out.println(jsonString);
             writer.append(JSON.toJSONString(inventory));
             writer.flush();
             writer.close();
@@ -45,11 +55,12 @@ public class InventoryController {
     }
 
     @RequestMapping("/add.do")
-    public void inventoryAdd(Integer productId,String user,Integer sum,HttpServletResponse response){
+    public void inventoryAdd(Integer id_product,String user,Integer sum,HttpServletResponse response){
         InventoryEntity inventory = new InventoryEntity();
         ProductDao pd = new ProductDao();
-        ProductEntity product = pd.findProductById(productId);
+        ProductEntity product = pd.findProductById(id_product);
         inventory.setProductByProductId(product);
+        inventory.setIdProduct(product.getId());
         inventory.setUser(user);
         inventory.setSum(sum);
         int r = dao.insertInventory(inventory);
@@ -110,9 +121,9 @@ public class InventoryController {
     }
 
     @RequestMapping("/updateInventory.do")
-    public void updateUser(Integer id,Integer productId,String user,Integer sum,HttpServletResponse response){
+    public void updateUser(Integer id,Integer id_product,String user,Integer sum,HttpServletResponse response){
         System.out.println("*****************update Inventory!************");
-        System.out.println("id="+id+" productId="+productId+" user="+user+" sum"+sum);
+        System.out.println("id="+id+" id_product="+id_product+" user="+user+" sum"+sum);
         InventoryEntity inventory = dao.findInventoryById(id);
         inventory.setUser(user);
         inventory.setSum(sum);
