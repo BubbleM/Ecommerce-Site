@@ -3,224 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <title>商品管理</title>
-    <link rel="stylesheet" type="text/css" href="css/skins/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/skins/default.css"/>
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css"> 
+    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="css/themes/icon.css">
     <script type="text/javascript" src="js/iframeTools.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="js/datagrid-detailview.js"></script>  
+    <script type="text/javascript" src="js/datagrid-detailview.js"></script>
     <script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="js/jquery.uploadify.min.js"></script>
-    <script type="text/javascript">
-		/* $(function(){
-			$("body").after("<script type='text/javascript'>$(function(){$('body').show();});<\/script>");
-			$("body").height($(window).height());
-			$("body").width($(window).width());
-			$(window).resize(function() {
-				$("body").height($(window).height());
-				$("body").width($(window).width());
-				$('#dg').datagrid('resize');
-			});
-		}); */
-	</script>
 </head>
-<body >
-    <table id="dg" title="Products" class="easyui-datagrid" fit="true"
-            url="product/getProducts.do" width="auto" height="auto"
-            toolbar="#toolbar" pagination="true" fitColumns="true"
-            rownumbers="true" fitColumns="true" singleSelect="true">
-        <thead>
-            <tr>
-                <th field="id" width="50">ID</th>
-                <th field="name" width="50">Name</th>
-                <th field="type" width="50">Type</th>
-                <th field="description" width="50">Description</th>
-            </tr>
-        </thead>
-    </table>
-    
-    
-    <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProduct()">New Product</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProduct()">Edit Product</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyProduct()">Remove Product</a>
-    </div>
-    
-    <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-            closed="true" buttons="#dlg-buttons">
-        <div class="ftitle">Product Information</div>
-        <form id="fm" method="post" novalidate>
-            <div class="fitem">
-                <label>Name:</label>
-                <input name="name" class="easyui-validatebox" required="true">
-            </div>
-            <div class="fitem">
-                <label>Type:</label>
-                <input name="type" class="easyui-validatebox" required="true">
-            </div>
-            <div class="fitem">
-                <label>Description:</label>
-                <input name="description" class="easyui-validatebox" required="true">
-            </div>
-        </form>
-    </div>
-    <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveProduct()">Save</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
-    </div>
-    
-    <div id="dlg_edit" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-            closed="true" buttons="#dlg-buttons-edit">
-        <div class="ftitle">Product Information</div>
-        <form id="fm_edit" method="post" novalidate>
-            <span id="id" style="display: none;"></span>
-            <div class="fitem">
-                <label>Name:</label>
-                <input name="name" class="easyui-validatebox" required="true">
-            </div>
-            <div class="fitem">
-                <label>Type:</label>
-                <input name="type" class="easyui-validatebox" required="true">
-            </div>
-            <div class="fitem">
-                <label>Description:</label>
-                <input name="description" class="easyui-validatebox" required="true">
-            </div>
-        </form>
-    </div>
-    <div id="dlg-buttons-edit">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="comfirmEditProduct()">Save</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_edit').dialog('close')">Cancel</a>
-    </div>
-    <script type="text/javascript">
-        var url;
-        function newProduct(){
-            $('#dlg').dialog('open').dialog('setTitle','添加商品');
-            $('#fm').form('clear');
-            url = 'product/add.do';
+<body>
+<table id="dg" title="Products" class="easyui-datagrid" fit="true"
+       url="product/getProducts.do" width="auto" height="auto"
+       toolbar="#toolbar" pagination="true" fitColumns="true"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="id" width="50">ID</th>
+        <th field="name" width="50">Name</th>
+        <th field="type" width="50">Type</th>
+        <th field="description" width="50">Description</th>
+    </tr>
+    </thead>
+</table>
+
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProduct()">New
+        Product</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProduct()">Edit
+        Product</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+       onclick="destroyProduct()">Remove Product</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">Product Information</div>
+    <form id="fm" method="post" novalidate>
+        <div class="fitem">
+            <label>Name:</label>
+            <input name="name" class="easyui-validatebox" required="true">
+        </div>
+        <div class="fitem">
+            <label>Type:</label>
+            <input name="type" class="easyui-validatebox" required="true">
+        </div>
+        <div class="fitem">
+            <label>Description:</label>
+            <input name="description" class="easyui-validatebox" required="true">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveProduct()">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
+</div>
+
+<div id="dlg_edit" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons-edit">
+    <div class="ftitle">Product Information</div>
+    <form id="fm_edit" method="post" novalidate>
+        <span id="id" style="display: none;"></span>
+        <div class="fitem">
+            <label>Name:</label>
+            <input name="name" class="easyui-validatebox" required="true">
+        </div>
+        <div class="fitem">
+            <label>Type:</label>
+            <input name="type" class="easyui-validatebox" required="true">
+        </div>
+        <div class="fitem">
+            <label>Description:</label>
+            <input name="description" class="easyui-validatebox" required="true">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons-edit">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="comfirmEditProduct()">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:$('#dlg_edit').dialog('close')">Cancel</a>
+</div>
+<script type="text/javascript">
+    var url;
+    function newProduct() {
+        $('#dlg').dialog('open').dialog('setTitle', '添加商品');
+        $('#fm').form('clear');
+        url = 'product/add.do';
+    }
+
+    function editProduct() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $('#dlg_edit').dialog('open').dialog('setTitle', 'Edit Product');
+            var id = row.id;
+            $("#id").text(id);
+            var name = row.name;
+            var type = row.type;
+            var description = row.description;
+            console.info("editProduct--->id = " + id + ",name = " + name + ",description = " + description + ", type = " + type);
+            $("#fm_edit").form('load', {
+                type: type,
+                id: id,
+                name: name,
+                description: description
+            });
         }
-        
-        function editProduct(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlg_edit').dialog('open').dialog('setTitle','Edit Product');
-                var id = row.id;
-                $("#id").text(id);
-                var name = row.name;
-                var type = row.type;
-                var description = row.description;
-                console.info("editProduct--->id = " + id + ",name = " + name + ",description = " + description + ", type = " +type);
-                $("#fm_edit").form('load',{
-                	type:type,
-                	id:id,
-                	name:name,
-                    description:description
-                });
+    }
+
+    function comfirmEditProduct() {
+        var id = $("#id").text();
+        $("#fm_edit").form('submit', {
+            url: "http://localhost:8080/EcommerceSiteLM/product/updateProduct.do?id=" + id,
+            onSubmit: function () {
+                var isValid = $("this").form('validate');
+
+                return isValid;
+            },
+            success: function (data) {
+                console.log("reslut: " + data);
+                if (data == "OK") {
+                    $.messager.show({
+                        title: 'Success',
+                        msg: '信息更新成功！'
+                    });
+                    $('#dlg_edit').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                } else {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: '信息更新失败！'
+                    });
+                    $('#dlg_edit').dialog('close');
+                }
             }
-        }
-        
-        function comfirmEditProduct(){
-        	var id = $("#id").text();
-        	//$.messager.progress();
-        	$("#fm_edit").form('submit',{
-//        	    url:'user/updateUser.do',
-        		url:"http://localhost:8080/EcommerceSiteLM/product/updateProduct.do?id=" + id,
-        		onSubmit:function(){
-        			var isValid = $("this").form('validate');
-        			/* if(!isValid){
-        				$.messager.progress('close');
-        			} */
-        			
-        			return isValid;
-        		},
-        		success:function(data){
-        			//$.messager.progress('close');
-        			console.log("reslut: " +data);
-                    if (data == "OK") {
-                        $.messager.show({
-                            title: 'Success',
-                            msg: '信息更新成功！'
-                        });
-                        $('#dlg_edit').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
-                    }else{
-                        $.messager.show({
-                            title: 'Error',
-                            msg: '信息更新失败！'
-                        });
-                        $('#dlg_edit').dialog('close'); 
-                    }
-        		}
-        	});
-        }
-        
-        function saveProduct(){
-            $('#fm').form('submit',{
-                url: "http://localhost:8080/EcommerceSiteLM/product/add.do",
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    //var result = eval('('+result+')');
-                    console.log("reslut: " +result);
-                    if (result == "OK") {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
-                    }else{
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                        $('#dlg').dialog('close'); 
-                    }
+        });
+    }
+
+    function saveProduct() {
+        $('#fm').form('submit', {
+            url: "http://localhost:8080/EcommerceSiteLM/product/add.do",
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                console.log("reslut: " + result);
+                if (result == "OK") {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                } else {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                    $('#dlg').dialog('close');
+                }
+            }
+        });
+    }
+    function destroyProduct() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            var index = $('#dg').datagrid('getRowIndex', row);
+            console.log("rowIndex: " + index);
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this product?', function (r) {
+                if (r) {
+                    $.post('product/delete.do', {id: row.id}, function (result) {
+                        console.log("result: " + result);
+                        if (result.success == true) {
+                            console.log("rowIndex: " + index);
+                            $('#dg').datagrid('deleteRow', index);
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
                 }
             });
         }
-        function destroyProduct(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-            	var index = $('#dg').datagrid('getRowIndex',row);
-            	console.log("rowIndex: " + index);
-                $.messager.confirm('Confirm','Are you sure you want to destroy this product?',function(r){
-                    if (r){
-                        $.post('product/delete.do',{id:row.id},function(result){
-                        	console.log("result: " + result);
-                        	if (result.success == true){
-                        		console.log("rowIndex: " + index);
-                        		$('#dg').datagrid('deleteRow',index);
-                                //$('#dg').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            }
-                        },'json');
-                    }
-                });
-            }
-        }
-    </script>
-    <style type="text/css">
-        #fm{
-            margin:0;
-            padding:10px 30px;
-        }
-        .ftitle{
-            font-size:14px;
-            font-weight:bold;
-            padding:5px 0;
-            margin-bottom:10px;
-            border-bottom:1px solid #ccc;
-        }
-        .fitem{
-            margin-bottom:5px;
-        }
-        .fitem label{
-            display:inline-block;
-            width:80px;
-        }
-    </style>
+    }
+</script>
+<style type="text/css">
+    #fm {
+        margin: 0;
+        padding: 10px 30px;
+    }
+
+    .ftitle {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .fitem {
+        margin-bottom: 5px;
+    }
+
+    .fitem label {
+        display: inline-block;
+        width: 80px;
+    }
+</style>
 </body>
 </html>

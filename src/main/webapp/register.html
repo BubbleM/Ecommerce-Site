@@ -11,58 +11,58 @@
     <script type="text/javascript">
         $(function () {
             //注册界面
-           $("#register").dialog({
-               title:'管理员注册',
-               width:300,
-               height:220,
-               modal:true,
-               iconCls:'icon-login',
-               buttons:'#btn',
-           });
-           //管理员帐号验证
+            $("#register").dialog({
+                title: '管理员注册',
+                width: 300,
+                height: 220,
+                modal: true,
+                iconCls: 'icon-login',
+                buttons: '#btn',
+            });
+            //管理员帐号验证
             $('#username').validatebox({
-                required:true,
-                missingMessage:'请输入管理员帐号',
-                invalidMessage:'管理员帐号不得为空',
+                required: true,
+                missingMessage: '请输入管理员帐号',
+                invalidMessage: '管理员帐号不得为空',
             });
             $('#password').validatebox({
-                required:true,
-                validType:'length[6,30]',
-                missingMessage:'请输入管理员密码',
-                invalidMessage:'管理员密码不得为少于6位',
+                required: true,
+                validType: 'length[6,30]',
+                missingMessage: '请输入管理员密码',
+                invalidMessage: '管理员密码不得为少于6位',
             });
             //加载时判断验证
-            if(!$('#username').validatebox('isValid')){
+            if (!$('#username').validatebox('isValid')) {
                 $('#username').focus();
-            }else if(!$('#password').validatebox('isValid')){
+            } else if (!$('#password').validatebox('isValid')) {
                 $('#password').focus();
             }
             //点击登录
             $('#btn a').click(function () {
-                if(!$('#username').validatebox('isValid')){
+                if (!$('#username').validatebox('isValid')) {
                     $('#username').focus();
-                }else if(!$('#password').validatebox('isValid')){
+                } else if (!$('#password').validatebox('isValid')) {
                     $('#password').focus();
-                }else {
+                } else {
                     $.ajax({
-                        url:"user/register.do",
-                        type:'post',
-                        data:{
-                            username:$('#username').val(),
-                            password:$('#password').val(),
+                        url: "user/register.do",
+                        type: 'post',
+                        data: {
+                            username: $('#username').val(),
+                            password: $('#password').val(),
                         },
-                        beforeSend:function () {
+                        beforeSend: function () {
                             $.messager.progress({
-                                text:'注册中...',
+                                text: '注册中...',
                             });
                         },
-                        success:function(result){
+                        success: function (result) {
                             $.messager.progress('close');
-                            if(result == "login"){
+                            if (result == "login") {
                                 alert('注册成功!');
                                 location.href = 'login.html';
-                            }else{
-                                $.messager.alert('注册失败!','用户名已经存在!','warning',function () {
+                            } else {
+                                $.messager.alert('注册失败!', '用户名已经存在!', 'warning', function () {
                                     $('#password').selected();
                                 });
                             }
@@ -73,33 +73,37 @@
         });
     </script>
     <style type="text/css">
-        #register{
+        #register {
             padding: 6px 0 0 0;
         }
-        p{
+
+        p {
             height: 22px;
             line-height: 22px;
             padding: 4px 0 8px 25px;
         }
-        .textbox{
+
+        .textbox {
             height: 22px;
             padding: 0 2px;
         }
-        .easyui-linkbutton{
+
+        .easyui-linkbutton {
             padding: 0 10px;
         }
-        #btn{
+
+        #btn {
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <div id="register">
-        <p>帐号:<input type="text" id="username" class="textbox"/></p>
-        <p>密码:<input type="password" id="password" class="textbox"/></p>
-    </div>
-    <div id="btn">
-        <a href="#" class="easyui-linkbutton">注册</a>
-    </div>
+<div id="register">
+    <p>帐号:<input type="text" id="username" class="textbox"/></p>
+    <p>密码:<input type="password" id="password" class="textbox"/></p>
+</div>
+<div id="btn">
+    <a href="#" class="easyui-linkbutton">注册</a>
+</div>
 </body>
 </html>
