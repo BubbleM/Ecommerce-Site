@@ -59,6 +59,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!--引入外部json转换包-->
+    <dependency>
+      <groupId>fastjson</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2/7</version>
+      <type>jar</type>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/fastjson-1.2.7.jar</systemPath>
+    </dependency>
 
     <!--json转化-->
     <dependency>
@@ -106,7 +115,11 @@
       <artifactId>jetty-util</artifactId>
       <version>6.1.25</version>
     </dependency>
-
+      <dependency>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-util</artifactId>
+          <version>6.1.25</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>EcommerceSiteLM</finalName>
