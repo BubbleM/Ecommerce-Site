@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.hibernate.internal.util.SerializationHelper.serialize;
-
 /**
  * Created by bubble on 17-6-7.
  */
@@ -18,7 +16,7 @@ public class UserDao {
     /*
     *插入新用户
     */
-    public int insertUser(UsersEntity user){
+    public int insertUser(UsersEntity user) {
         Session session = null; //声明Session对象
         int result;
         try {
@@ -27,30 +25,30 @@ public class UserDao {
             session.save(user);  //保存用户信息
             session.getTransaction().commit(); //提交事务
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-        System.out.println("____________"+result);
+        System.out.println("____________" + result);
         return result;
     }
 
     /*
     * 管理员根据id删除相应用户
     */
-    public int deleteUser(Integer id){
+    public int deleteUser(Integer id) {
         int result;
         Session session = null;
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            UsersEntity user = session.load(UsersEntity.class,new Integer(id));
+            UsersEntity user = session.load(UsersEntity.class, new Integer(id));
             session.delete(user);
             session.getTransaction().commit();
-            System.out.println("删除成功"+id);
+            System.out.println("删除成功" + id);
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -61,21 +59,21 @@ public class UserDao {
     /*
     * 修改用户密码
     */
-    public void updatePwdByName(String name,String password){
+    public void updatePwdByName(String name, String password) {
         Session session = null;
         String pwd = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            String hql = "update UsersEntity set password='"+password+"' where name='"+name+"' ";
+            String hql = "update UsersEntity set password='" + password + "' where name='" + name + "' ";
             int result = session.createQuery(hql).executeUpdate();
-            if(result == 1){
+            if (result == 1) {
                 System.out.println("update success");
-            }else {
+            } else {
                 System.out.println("sorry please try agagin");
             }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -84,50 +82,40 @@ public class UserDao {
     /*
     * 查找数据库中所有user信息
     * */
-    public List<UsersEntity> getUsers(){
+    public List<UsersEntity> getUsers() {
         Session session = null;
         List<UsersEntity> list = null;
-//        List<UsersEntity> users = new ArrayList<UsersEntity>();
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
             String hql = "from UsersEntity u";
             Query query = session.createQuery(hql);
             list = query.list();
-//            for(UsersEntity user:list){
-//                if(list != null){
-////                    String json = JSON.toJSONString(user);
-//                    users.add(user);
-////                    System.out.println(json);
-//                }
-//            }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
-//        System.out.println(arr);
-//        return arr;
         return list;
     }
 
     /*
     * 根据用户输入的用户名查找密码
     */
-    public String findPwdByName(String name){
+    public String findPwdByName(String name) {
         Session session = null;
         String pwd = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            String hql = "select u.password from UsersEntity u where name='"+name+"' ";
+            String hql = "select u.password from UsersEntity u where name='" + name + "' ";
             List list = session.createQuery(hql).list();
             Iterator it = list.iterator();
-            while (it.hasNext()){
+            while (it.hasNext()) {
                 pwd = (String) it.next();
             }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -137,23 +125,23 @@ public class UserDao {
     /*
     * 根据输入的用户名查询是否已经存在
     */
-    public boolean findUserByName(String name){
+    public boolean findUserByName(String name) {
         Session session = null;
         String pwd = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            String hql = "from UsersEntity user where user.name='"+name+"'";
+            String hql = "from UsersEntity user where user.name='" + name + "'";
             Query query = session.createQuery(hql);
             List<UsersEntity> list = query.list();
-            for(UsersEntity user:list){
-                if(list != null){
+            for (UsersEntity user : list) {
+                if (list != null) {
                     System.out.println("该用户已经存在");
                     return true;
                 }
             }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -163,31 +151,32 @@ public class UserDao {
     /*
     * 保存或更改用户对象
     * */
-    public int saveOrUpdateUser(UsersEntity user){
+    public int saveOrUpdateUser(UsersEntity user) {
         Session session = null;
         int result;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
             session.saveOrUpdate(user);
             session.getTransaction().commit();
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
         }
         return result;
     }
-    public UsersEntity findUserById(Integer id){
+
+    public UsersEntity findUserById(Integer id) {
         Session session = null;
         UsersEntity user = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            user = (UsersEntity)session.get(UsersEntity.class,id);
+            user = (UsersEntity) session.get(UsersEntity.class, id);
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
@@ -195,14 +184,14 @@ public class UserDao {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         UserDao dao = new UserDao();
 //        System.out.println(dao.getUsers());
 //        System.out.println(dao.findUserById(69).getName());
 //        UsersEntity user = null;
 //        dao.deleteUser(42);
 //        dao.updatePwdByName("ddds","099");
-//      String password =  dao.findPwdByName("BubbleM");
+//        String password =  dao.findPwdByName("BubbleM");
 //        System.out.println(dao.findUserByName("jj"));
 //        String password = user.getPassword();
 //        System.out.print(password);

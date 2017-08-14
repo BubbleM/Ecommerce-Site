@@ -15,28 +15,32 @@ import org.hibernate.cfg.Configuration;
     * */
 public class HibernateUtil {
     private static SessionFactory factory = null;
+
     static {
         try {
             Configuration cfg = new Configuration().configure(); //加载Hibernate配置文件
             factory = cfg.buildSessionFactory(); //实例化SessionFactory
-        }catch (HibernateException e){
+        } catch (HibernateException e) {
             e.printStackTrace();
         }
     }
-//    获取Session对象的方法
-    public static Session getSession(){
+
+    //    获取Session对象的方法
+    public static Session getSession() {
 //        如果SessionFactory不为空,则开启Session
         Session session = (factory != null) ? factory.openSession() : null;
         return session;
     }
-//    获取SessionFactory对象的方法
-    public static SessionFactory getSessionFactory(){
+
+    //    获取SessionFactory对象的方法
+    public static SessionFactory getSessionFactory() {
         return factory;
     }
-//    关闭Session的方法
-    public static void closeSession(Session session){
-        if(session != null){
-            if(session.isOpen()){
+
+    //    关闭Session的方法
+    public static void closeSession(Session session) {
+        if (session != null) {
+            if (session.isOpen()) {
                 session.close();
             }
         }

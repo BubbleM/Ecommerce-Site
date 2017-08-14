@@ -22,28 +22,18 @@ import java.util.Map;
 @Controller
 @RequestMapping("/inventory")
 public class InventoryController {
-
     InventoryDao dao = new InventoryDao();
 
     @RequestMapping("/getInventory.do")
     @ResponseBody
     public void getInventory(HttpServletResponse response){
         List<InventoryEntity> inventory = dao.getInventory();
+
         System.out.println("get product info!");
         response.setCharacterEncoding("utf-8");
         Writer writer;
         try{
             writer = response.getWriter();
-//            System.out.println("________"+inventory);
-//            for(InventoryEntity inv:inventory){
-//                if(inventory!= null){
-//                    Integer id = inv.getProductByProductId().getId();
-//                    inv.setProductByProductId(id);
-//                    String json = JSON.toJSONString(inv.getProductByProductId().getId());
-//                    users.add(user);
-//                    System.out.println("------"+json);
-//                }
-//            }
             String jsonString = JSON.toJSONString(inventory);
             System.out.println(jsonString);
             writer.append(JSON.toJSONString(inventory));
@@ -58,24 +48,25 @@ public class InventoryController {
     public void inventoryAdd(Integer id_product,String user,Integer sum,HttpServletResponse response){
         InventoryEntity inventory = new InventoryEntity();
         ProductDao pd = new ProductDao();
+
         ProductEntity product = pd.findProductById(id_product);
         inventory.setProductByProductId(product);
         inventory.setIdProduct(product.getId());
         inventory.setUser(user);
         inventory.setSum(sum);
         int r = dao.insertInventory(inventory);
+
         response.setCharacterEncoding("utf-8");
         Writer writer = null;
         try {
             writer = response.getWriter();
-            if(r>0){
+            if(r > 0){
                 writer.append("OK");
             }else{
                 writer.append("NO");
             }
             writer.flush();
         }catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally{
             if(writer != null){
@@ -140,7 +131,6 @@ public class InventoryController {
             }
             writer.flush();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally{
             if(writer != null){

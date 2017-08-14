@@ -14,7 +14,7 @@ public class ProductDao {
     /*
     * 添加商品
     * */
-    public int insertProduct(ProductEntity product){
+    public int insertProduct(ProductEntity product) {
         Session session = null; //声明Session对象
         int result;
         try {
@@ -23,7 +23,7 @@ public class ProductDao {
             session.save(product);  //保存用户信息
             session.getTransaction().commit(); //提交事务
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -34,22 +34,22 @@ public class ProductDao {
     /*
    * 根据输入的商品名查询是否已经存在
    */
-    public boolean findProductByName(String name){
+    public boolean findProductByName(String name) {
         Session session = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            String hql = "from ProductEntity product where product.name='"+name+"'";
+            String hql = "from ProductEntity product where product.name='" + name + "'";
             Query query = session.createQuery(hql);
             List<ProductEntity> list = query.list();
-            for(ProductEntity product:list){
-                if(list != null){
+            for (ProductEntity product : list) {
+                if (list != null) {
                     System.out.println("该商品已经存在");
                     return true;
                 }
             }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -59,22 +59,22 @@ public class ProductDao {
     /*
     * 根据商品类型查询商品
     * */
-    public boolean findProductByType(String type){
+    public boolean findProductByType(String type) {
         Session session = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            String hql = "from ProductEntity product where product.type='"+type+"'";
+            String hql = "from ProductEntity product where product.type='" + type + "'";
             Query query = session.createQuery(hql);
             List<ProductEntity> list = query.list();
-            for(ProductEntity product:list){
+            for (ProductEntity product : list) {
                 System.out.println(product.getId());
                 System.out.println(product.getName());
                 System.out.println(product.getType());
                 System.out.println(product.getDescription());
             }
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -84,17 +84,17 @@ public class ProductDao {
     /*
    * 查找数据库中所有product信息
    * */
-    public List<ProductEntity> getProducts(){
+    public List<ProductEntity> getProducts() {
         Session session = null;
         List<ProductEntity> list = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
             String hql = "from ProductEntity u";
             Query query = session.createQuery(hql);
             list = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction();
         }
@@ -104,18 +104,18 @@ public class ProductDao {
     /*
    * 管理员根据id删除相应商品
    */
-    public int deleteProduct(Integer id){
+    public int deleteProduct(Integer id) {
         int result;
         Session session = null;
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            ProductEntity product = session.load(ProductEntity.class,new Integer(id));
+            ProductEntity product = session.load(ProductEntity.class, new Integer(id));
             session.delete(product);
             session.getTransaction().commit();
-            System.out.println("删除成功"+id);
+            System.out.println("删除成功" + id);
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -126,16 +126,16 @@ public class ProductDao {
     /*
    * 保存或更改product对象
    * */
-    public int saveOrUpdateProduct(ProductEntity product){
+    public int saveOrUpdateProduct(ProductEntity product) {
         Session session = null;
         int result;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
             session.saveOrUpdate(product);
             session.getTransaction().commit();
             result = 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             result = 0;
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -146,15 +146,15 @@ public class ProductDao {
     /*
     * 根据id查找对应的商品并返回对应实体对象
     * */
-    public ProductEntity findProductById(Integer id){
+    public ProductEntity findProductById(Integer id) {
         Session session = null;
         ProductEntity product = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
-            product = (ProductEntity) session.get(ProductEntity.class,id);
+            product = (ProductEntity) session.get(ProductEntity.class, id);
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
@@ -162,7 +162,7 @@ public class ProductDao {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ProductDao dao = new ProductDao();
 //        System.out.println(dao.getProducts());
 //        ProductEntity product = new ProductEntity();
